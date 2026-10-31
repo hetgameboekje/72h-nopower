@@ -247,6 +247,56 @@ sequenceDiagram
 
 ---
 
+## 🌿 Branching & versiebeheer
+
+Er wordt **nooit direct op `main`** gewerkt. Elke wijziging krijgt een eigen branch en gaat via een pull request terug naar `main`.
+
+**Naamgeving:** `<type>/<initialen>-<JJJJMMDD>-<korte-titel>`
+
+| Onderdeel | Uitleg |
+|---|---|
+| `type` | Soort wijziging (zie tabel hieronder) |
+| `initialen` | Initialen van de maker, kleine letters (bv. `tb` voor Timo Bergthaler) |
+| `JJJJMMDD` | Datum waarop de branch is aangemaakt |
+| `korte-titel` | Korte omschrijving in kleine letters, woorden gescheiden door `-` |
+
+| Type | Gebruik |
+|---|---|
+| `proposal` | Voorstel, onderzoek of proof-of-concept dat nog besproken moet worden |
+| `feature` | Nieuwe functionaliteit |
+| `bugfix` | Herstel van een fout die (nog) niet in productie/demo zit |
+| `hotfix` | Dringende fix op een werkende versie op `main` |
+| `refactor` | Code herstructureren zonder gedragswijziging |
+| `docs` | Alleen documentatie (README, notulen, onderzoek) |
+| `chore` | Onderhoud: configuratie, dependencies, tooling |
+
+**Voorbeelden:**
+
+```
+feature/tb-20261031-login
+hotfix/tb-20261101-authenticate
+proposal/jm-20261102-meshtastic-vs-meshcore
+docs/fv-20261103-energieonderzoek
+```
+
+```bash
+git checkout main && git pull
+git checkout -b feature/tb-20261031-login
+```
+
+### AI coding agents
+
+Coding agents (Claude Code, Copilot, Cursor, enz.) mogen helpen, maar komen **niet** als contributor/co-author in de git-historie te staan:
+
+- [`.claude/settings.json`](./.claude/settings.json) zet de `Co-Authored-By`-regel van Claude Code uit voor commits en PR's.
+- [`.githooks/commit-msg`](./.githooks/commit-msg) haalt eventuele `Co-authored-by`-regels van AI-agents automatisch uit elk commitbericht. Activeer deze hook eenmalig per clone:
+
+  ```bash
+  git config core.hooksPath .githooks
+  ```
+
+---
+
 ## 👥 Team
 
 | Naam | Richting |

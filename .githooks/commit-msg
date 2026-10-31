@@ -1,0 +1,7 @@
+#!/bin/sh
+# Verwijdert co-author/attributieregels van AI coding agents uit het commitbericht,
+# zodat alleen menselijke teamleden als contributor in de git-historie verschijnen.
+msg_file="$1"
+tmp="$msg_file.tmp"
+grep -viE '^co-authored-by:.*(claude|anthropic|copilot|cursor|codex|openai|chatgpt|gemini|devin|aider|codeium|windsurf|\[bot\])|generated with \[?claude code' "$msg_file" > "$tmp"
+mv "$tmp" "$msg_file"
